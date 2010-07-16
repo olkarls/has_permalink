@@ -2,6 +2,7 @@
 
 module FriendlyUrl
   def normalize(str)
+    str = "" if str.blank?
     n = str.mb_chars.downcase.strip.to_s
     n.gsub!(/[àáâãäåāă]/,     'a')
     n.gsub!(/æ/,              'ae')
