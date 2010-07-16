@@ -19,7 +19,7 @@ $ Post.permalink = "title-with-swedish-charachters-like-this-a-aoo-ao-in-it"
 
 The permalink attribute is not transformed unless it's blank.
 
-The plugin assumes that the permalink attribute is generated from the title attribute but it can be changed by providing the field_to_generate_form attribute:
+The plugin assumes that the permalink attribute is generated from the title attribute but it can be changed by providing the field_to_generate_from option:
 
 class Post < ActiveRecord::Base
   has_permalink(:field_to_generate_from => :heading)
