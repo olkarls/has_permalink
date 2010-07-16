@@ -1,3 +1,5 @@
+# coding: utf-8
+
 module FriendlyUrl
   def normalize(str)
     n = str.mb_chars.downcase.strip.to_s

@@ -1,3 +1,3 @@
-class ActiveRecord::Base
-  extend HasPermalink
-end
+#class ActiveRecord::Base
+#  extend HasPermalink
+#end

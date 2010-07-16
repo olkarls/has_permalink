@@ -1,8 +1,10 @@
+require 'friendly_url'
+
 module HasPermalink
   def has_permalink(options = {})
     options[:field_to_generate]       ||= "permalink"
     options[:field_to_generate_from]  ||= "title"
-    
+
     unless included_modules.include? Behavior
       class_inheritable_accessor :options
       include Behavior
@@ -15,8 +17,8 @@ module HasPermalink
   module Behavior
     include FriendlyUrl
     def generate_permalink
-      if @permalink.blank?
-        eval("self.#{options[:field_to_generate]}") = normalize(eval("self.#{options[:field_to_generate_from]}"))
+      if permalink.blank?
+        self.permalink = normalize(eval("self.#{options[:field_to_generate_from]}"))
       end
     end
     
@@ -25,3 +27,5 @@ module HasPermalink
     end
   end
 end
+
+ActiveRecord::Base.send :extend, HasPermalink
