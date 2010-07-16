@@ -13,9 +13,9 @@ class Post < ActiveRecord::Base
   has_permalink
 end
 
-$ Post.new(:title => "Title swedish charachters like this ä åöö äö in it")
+$ Post.new(:title => "Title with swedish charachters like this ä åöö äö in it")
 $ Post.save
-$ Post.permalink = "title-swedish-charachters-like-this-a-aoo-ao-in-it"
+$ Post.permalink = "title-with-swedish-charachters-like-this-a-aoo-ao-in-it"
 
 The permalink attribute is not transformed unless it's blank.
 
