@@ -30,4 +30,10 @@ class HasPermalinkTest < Test::Unit::TestCase
     category.valid?
     assert_equal "some-really-cool-category", category.permalink
   end
+  
+  def test_should_not_generate_more_than_one_dash
+    post = Post.new(:title => "Home - some cool site - some slogan")
+    post.valid?
+    assert_equal "home-some-cool-site-some-slogan", post.permalink
+  end
 end
