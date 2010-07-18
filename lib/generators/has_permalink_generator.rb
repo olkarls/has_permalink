@@ -2,7 +2,6 @@ require 'rails/generators/active_record'
 
 class HasPermalinkGenerator < ActiveRecord::Generators::Base
   desc "Create a migration to add a permalink field to your model."
-  argument :model_name, :type => :string, :required => true, :desc => "The model you want to add a permalink to"
   
   def self.source_root
     @source_root ||= File.expand_path('../templates', __FILE__)
@@ -15,7 +14,7 @@ class HasPermalinkGenerator < ActiveRecord::Generators::Base
   protected
 
   def migration_name
-    "add_permalink_to_#{model_name.underscore}"
+    "add_permalink_to_#{name.underscore}"
   end
 
   def migration_file_name
