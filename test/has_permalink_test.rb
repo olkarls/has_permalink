@@ -10,7 +10,7 @@ class HasPermalinkTest < Test::Unit::TestCase
   end
   
   class Category < ActiveRecord::Base
-    has_permalink(:field_to_generate_from => :name)
+    has_permalink(:name)
   end
   
   def test_should_generate_permalink
