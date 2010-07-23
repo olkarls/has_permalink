@@ -1,5 +1,5 @@
 has_permalink
-============
+=============
 
 A plugin for generating url-safe permalink-string from any other attribute in the same ActiveRecord model.
 
