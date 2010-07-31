@@ -19,6 +19,10 @@ module HasPermalink
       end
     end
     
+    def generate_permalink!
+      self.permalink = normalize(eval("#{generate_from.to_s}"))
+    end
+    
     def to_param
       permalink
     end

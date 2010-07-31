@@ -36,4 +36,23 @@ class HasPermalinkTest < Test::Unit::TestCase
     post.valid?
     assert_equal "home-some-cool-site-some-slogan", post.permalink
   end
+  
+  def test_should_generate_without_callback
+    post = Post.new(:title => "Really teasing title")
+    post.generate_permalink
+    assert_equal "really-teasing-title", post.permalink
+  end
+  
+  def test_force_regeneration
+    post = Post.new(:title => "Really teasing title")
+    post.valid?
+    assert_equal "really-teasing-title", post.permalink
+    post.title = "Another title"
+    post.valid?
+    assert_equal "really-teasing-title", post.permalink
+    post.generate_permalink
+    assert_equal "really-teasing-title", post.permalink
+    post.generate_permalink!
+    assert_equal "another-title", post.permalink
+  end
 end
