@@ -14,13 +14,11 @@ module HasPermalink
   module Behavior
     include FriendlyUrl
     def generate_permalink
-      if permalink.blank?
-        self.permalink = normalize(eval("#{generate_from.to_s}"))
-      end
+      self.permalink = normalize(self.send(generate_from)) if permalink.blank?
     end
     
     def generate_permalink!
-      self.permalink = normalize(eval("#{generate_from.to_s}"))
+      self.permalink = normalize(self.send(generate_from))
     end
     
     def to_param
