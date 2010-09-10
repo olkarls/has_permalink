@@ -59,11 +59,4 @@ class HasPermalinkTest < Test::Unit::TestCase
     post.generate_permalink!
     assert_equal "another-title", post.permalink
   end
-  
-  def test_no_method_error?
-    user = User.new(:name => "Bruce Wayne")
-    assert_raise NameError do
-      assert_equal 'No attribute in model, run the has_permalink generator', exception.message
-    end
-  end
 end
