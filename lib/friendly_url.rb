@@ -3,7 +3,7 @@ module FriendlyUrl
   $KCODE = "U"
   def normalize(str)
     unless str.blank?
-      n = str.mb_chars.to_s.downcase.strip
+      n = str.mb_chars.downcase.to_s.strip
       n.gsub!(/[àáâãäåāă]/,     'a')
       n.gsub!(/æ/,              'ae')
       n.gsub!(/[ďđ]/,           'd')
@@ -30,6 +30,7 @@ module FriendlyUrl
       n.gsub!(/\s+/,            '-')
       n.gsub!(/[^\sa-z0-9_-]/,  '')
       n.gsub!(/-{2,}/,          '-')
+      n.gsub!(/^-/,             '')
       n
     end
   end
