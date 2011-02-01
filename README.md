@@ -46,6 +46,11 @@ Use this syntax your controller:
 
 ## Updates
 
-2011-01-31, version 0.0.6: Fixed a bug where the permalink could sometimes remove characters.
+### 2011-01-31, version 0.0.6:
+* Fixed a bug where the permalink could sometimes remove characters.
+
+### 2011-02-01, version 0.0.7:
+* Permalinks can't start or end with '-'.
+* Added class method for use in rake task.
 
 Copyright (c) 2009 - 2011 Ola Karlsson, released under the MIT license
