@@ -31,6 +31,7 @@ module FriendlyUrl
       n.gsub!(/[^\sa-z0-9_-]/,  '')
       n.gsub!(/-{2,}/,          '-')
       n.gsub!(/^-/,             '')
+      n.gsub!(/-$/,             '')
       n
     end
   end
