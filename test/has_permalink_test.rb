@@ -17,6 +17,10 @@ class HasPermalinkTest < Test::Unit::TestCase
     has_permalink(:name)
   end
 
+  class Department < ActiveRecord::Base
+    has_permalink(:name)
+  end
+
   def test_should_generate_permalink
     post = Post.new(:title => "En annorlunda titel med åäö")
     post.valid?
@@ -61,10 +65,20 @@ class HasPermalinkTest < Test::Unit::TestCase
   end
 
   def test_it_generates_useful_permalink_from_nonsense
-    crazy_title      = '< /\|/\ > - SÖme REÄLLY CrÅzÛ stÖffzzz!!!! <<<<=======, CÖöL!'
-    useful_permalink = 'some-really-crazu-stoffzzz-cool'
-    post = Post.new(:title => crazy_title)
+    post = Post.new(:title => '< /\|/\ > - SÖme REÄLLY CrÅzÛ stÖffzzz!!!! <<<<=======, CÖöL!')
     post.valid?
-    assert_equal useful_permalink, post.permalink
+    assert_equal 'some-really-crazu-stoffzzz-cool', post.permalink
+  end
+
+  def test_it_does_not_start_with_a_dash
+    post = Post.new(:title => '- Some Title!')
+    post.valid?
+    assert_equal 'some-title', post.permalink
+  end
+
+  def test_it_does_not_end_with_a_dash
+    post = Post.new(:title => "äö'äö'ö'å¨¨¨¨ --- ")
+    post.valid?
+    assert_equal 'aoaooa', post.permalink
   end
 end
