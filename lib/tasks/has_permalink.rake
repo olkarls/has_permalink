@@ -12,6 +12,7 @@ namespace :has_permalink do
   end
 end
 
+# Calls the class method 'generate_permalinks' on given model
 def generate_permalinks(model_name)
   begin
     if Kernel.const_get(model_name)
