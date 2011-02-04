@@ -15,6 +15,12 @@ module HasPermalink
   end
 
   module ClassMethods
+
+    # Makes it possible to generate permalinks for
+    # all instances of self:
+    #
+    #   Product.generate_permalinks
+    #
     def generate_permalinks
       self.all.each do |item|
         item.generate_permalink
@@ -25,14 +31,18 @@ module HasPermalink
 
   module InstanceMethods
     include FriendlyUrl
+
+    # Generate permalink for the instance if the permalink is empty or nil.
     def generate_permalink
       self.permalink = normalize(self.send(generate_from)) if permalink.blank?
     end
 
+    # Generate permalink for the instance and overwrite any existing value.
     def generate_permalink!
       self.permalink = normalize(self.send(generate_from))
     end
 
+    # Override to send permalink as params[:id]
     def to_param
       permalink
     end
