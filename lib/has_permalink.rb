@@ -1,7 +1,7 @@
 require 'friendly_url'
 
 module HasPermalink
-  require 'railtie' if defined?(Rails)
+  require 'railtie' if defined?(Rails) && Rails.version >= "3"
 
   def has_permalink(generate_from = :title)
     unless included_modules.include? InstanceMethods
