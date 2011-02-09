@@ -8,6 +8,8 @@ ActiveRecord::Schema.define(:version => 0) do
     t.string :permalink
   end
   create_table :users, :force => true do |t|
-    t.string :name
+    t.string :first_name
+    t.string :last_name
+    t.string :permalink
   end
 end

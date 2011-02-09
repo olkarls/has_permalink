@@ -15,6 +15,10 @@ class HasPermalinkTest < Test::Unit::TestCase
 
   class User < ActiveRecord::Base
     has_permalink(:name)
+
+    def name
+      "#{first_name} #{last_name}"
+    end
   end
 
   class Department < ActiveRecord::Base
@@ -80,5 +84,11 @@ class HasPermalinkTest < Test::Unit::TestCase
     post = Post.new(:title => "äö'äö'ö'å¨¨¨¨ --- ")
     post.valid?
     assert_equal 'aoaooa', post.permalink
+  end
+
+  def test_it_can_generate_permalink_form_method
+    user = User.new(:first_name => 'Ola', :last_name => 'Karlsson')
+    user.valid?
+    assert_equal 'ola-karlsson', user.permalink
   end
 end
