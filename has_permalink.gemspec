@@ -5,5 +5,5 @@ Gem::Specification.new do |gem|
   gem.version = '0.0.8'
   gem.summary = 'SEO Permalink Plugin for Ruby on Rails.'
   gem.files = Dir['lib/**/*', 'rails/**/*']
-  gem.hompage = 'haspermalink.org'
+  gem.homepage = 'haspermalink.org'
 end
