@@ -46,6 +46,10 @@ Use this syntax your controller:
 
 ## Updates
 
+### 2011-03-12, version 0.0.8
+* Removed the Rails 3 dependency.
+* Updated homepage
+
 ### 2011-02-01, version 0.0.7:
 * Permalinks can't start or end with '-'.
 * Added class method for use in rake task.
