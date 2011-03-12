@@ -1,5 +1,7 @@
 # has_permalink
 
+Checkout <a href="http://haspermalink.org">haspermalink.org</a> for more details.
+
 A gem for generating url-safe permalink-string from any other attribute in the same ActiveRecord model.
 
 Make you urls look like '/users/olkarls' instead of '/users/1'.
