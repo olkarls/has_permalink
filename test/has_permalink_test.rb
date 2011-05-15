@@ -91,4 +91,31 @@ class HasPermalinkTest < Test::Unit::TestCase
     user.valid?
     assert_equal 'ola-karlsson', user.permalink
   end
+
+  def test_find_queries_by_permalink_field
+    user = User.new(:first_name => 'Ola', :last_name => 'Karlsson')
+    user.save
+
+    user_id = user.id
+
+    user = User.find(user_id)
+    assert_not_nil user
+
+    user = nil
+
+    user = User.find('ola-karlsson')
+    assert_not_nil user
+  end
+
+  def test_throws_record_not_found_for_id_parameter
+    assert_raise ActiveRecord::RecordNotFound do
+      Post.find(1)
+    end
+  end
+
+  def test_throws_record_not_found_for_permalink_parameter
+    assert_raise ActiveRecord::RecordNotFound do
+      Post.find('some-permalink')
+    end
+  end
 end
