@@ -19,11 +19,7 @@ module HasPermalink
     # find(params[:id]) is quering the permalink field if it's a string
     #
     def find(*args)
-      if args.is_a?(Array) && args.first.is_a?(String) && args.first.to_i == 0
-        find_by_permalink!(args)
-      else
-        super
-      end
+      find_by_permalink!(args)
     end
 
     # Makes it possible to generate permalinks for
