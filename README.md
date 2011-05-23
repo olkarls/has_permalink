@@ -48,9 +48,12 @@ Use this syntax your controller:
 
 ## Updates
 
+### 2011-05-23
+* Override find to query the permalink attribute.
+
 ### 2011-03-12, version 0.0.8
 * Removed the Rails 3 dependency.
-* Updated homepage
+* Updated homepage.
 
 ### 2011-02-01, version 0.0.7:
 * Permalinks can't start or end with '-'.
