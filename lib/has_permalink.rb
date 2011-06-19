@@ -5,7 +5,7 @@ module HasPermalink
 
   def has_permalink(generate_from = :title)
     unless included_modules.include? InstanceMethods
-      class_inheritable_accessor :generate_from
+      class_attribute :generate_from
       extend ClassMethods
       include InstanceMethods
     end
