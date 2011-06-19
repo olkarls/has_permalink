@@ -1,6 +1,6 @@
 # encoding: utf-8
 module FriendlyUrl
-  $KCODE = "U"
+  $KCODE = "U" unless RUBY_VERSION > "1.9.0"
   def normalize(str)
     unless str.blank?
       n = str.mb_chars.downcase.to_s.strip
