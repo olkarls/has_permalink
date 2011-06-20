@@ -14,7 +14,7 @@ class HasPermalinkTest < Test::Unit::TestCase
   end
 
   class User < ActiveRecord::Base
-    has_permalink(:name)
+    has_permalink(:name, true)
 
     def name
       "#{first_name} #{last_name}"
@@ -22,7 +22,11 @@ class HasPermalinkTest < Test::Unit::TestCase
   end
 
   class Department < ActiveRecord::Base
-    has_permalink(:name)
+    has_permalink(:name, true)
+
+    def resolve_duplication(permalink, number)
+      "#{permalink}-007"
+    end
   end
 
   def test_should_generate_permalink
@@ -92,21 +96,6 @@ class HasPermalinkTest < Test::Unit::TestCase
     assert_equal 'ola-karlsson', user.permalink
   end
 
-  def test_find_queries_by_permalink_field
-    user = User.new(:first_name => 'Ola', :last_name => 'Karlsson')
-    user.save
-
-    user_id = user.id
-
-    user = User.find(user_id)
-    assert_not_nil user
-
-    user = nil
-
-    user = User.find('ola-karlsson')
-    assert_not_nil user
-  end
-
   def test_throws_record_not_found_for_id_parameter
     assert_raise ActiveRecord::RecordNotFound do
       Post.find(1)
@@ -117,5 +106,21 @@ class HasPermalinkTest < Test::Unit::TestCase
     assert_raise ActiveRecord::RecordNotFound do
       Post.find('some-permalink')
     end
+  end
+
+  def test_auto_fix_duplication
+    u1 = User.create!(:first_name => 'James', :last_name => 'Bond')
+    assert_equal 'james-bond', u1.permalink
+
+    u2 = User.create!(:first_name => 'James', :last_name => 'Bond')
+    assert_equal 'james-bond-1', u2.permalink
+  end
+
+  def test_auto_fix_duplication
+    d1 = Department.create!(:name => 'Development')
+    assert_equal 'development', d1.permalink
+
+    d2 = Department.create!(:name => 'Development')
+    assert_equal 'development-007', d2.permalink
   end
 end

@@ -3,14 +3,16 @@ require 'friendly_url'
 module HasPermalink
   require 'railtie' if defined?(Rails) && Rails.version >= "3"
 
-  def has_permalink(generate_from = :title)
+  def has_permalink(generate_from = :title, auto_fix_duplication = false)
     unless included_modules.include? InstanceMethods
       class_attribute :generate_from
+      class_attribute :auto_fix_duplication
       extend ClassMethods
       include InstanceMethods
     end
 
-    self.generate_from = generate_from
+    self.generate_from        = generate_from
+    self.auto_fix_duplication = auto_fix_duplication
     before_validation :generate_permalink
   end
 
@@ -40,17 +42,38 @@ module HasPermalink
 
     # Generate permalink for the instance if the permalink is empty or nil.
     def generate_permalink
-      self.permalink = normalize(self.send(generate_from)) if permalink.blank?
+      self.permalink = fix_duplication(normalize(self.send(generate_from))) if permalink.blank?
     end
 
     # Generate permalink for the instance and overwrite any existing value.
     def generate_permalink!
-      self.permalink = normalize(self.send(generate_from))
+      self.permalink = fix_duplication(normalize(self.send(generate_from)))
     end
 
     # Override to send permalink as params[:id]
     def to_param
       permalink
+    end
+
+    private
+
+    # Autofix duplication of permalinks
+    def fix_duplication(permalink)
+      if auto_fix_duplication
+        n = self.class.where(:permalink => permalink).length
+
+        if n > 0
+          resolve_duplication(permalink, n)
+        else
+          permalink
+        end
+      else
+        permalink
+      end
+    end
+
+    def resolve_duplication(permalink, number)
+      "#{permalink}-#{number}"
     end
   end
 end

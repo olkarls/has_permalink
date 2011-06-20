@@ -12,4 +12,8 @@ ActiveRecord::Schema.define(:version => 0) do
     t.string :last_name
     t.string :permalink
   end
+  create_table :departments, :force => true do |t|
+    t.string :name
+    t.string :permalink
+  end
 end
