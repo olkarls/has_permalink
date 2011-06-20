@@ -96,6 +96,14 @@ class HasPermalinkTest < Test::Unit::TestCase
     assert_equal 'ola-karlsson', user.permalink
   end
 
+  def test_it_finds_by_permalink
+    p = Post.create!(:title => 'Super Awesome Title')
+
+    post = Post.find('super-awesome-title')
+
+    assert_not_nil post
+  end
+
   def test_throws_record_not_found_for_id_parameter
     assert_raise ActiveRecord::RecordNotFound do
       Post.find(1)
