@@ -122,6 +122,12 @@ class HasPermalinkTest < Test::Unit::TestCase
 
     u2 = User.create!(:first_name => 'James', :last_name => 'Bond')
     assert_equal 'james-bond-1', u2.permalink
+
+    u3 = User.create!(:first_name => 'James', :last_name => 'Bond')
+    assert_equal 'james-bond-2', u3.permalink
+
+    u4 = User.create!(:first_name => 'James', :last_name => 'Bond')
+    assert_equal 'james-bond-3', u4.permalink
   end
 
   def test_auto_fix_duplication
