@@ -48,6 +48,10 @@ Use this syntax your controller:
 
 ## Updates
 
+### 2011-06-20, version 0.1.0
+* Auto resolve duplication, if wanted
+* Merged Anoopr's fork, thanks!
+
 ### 2011-05-23
 * Override find to query the permalink attribute.
 
