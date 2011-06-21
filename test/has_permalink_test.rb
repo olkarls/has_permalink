@@ -117,17 +117,17 @@ class HasPermalinkTest < Test::Unit::TestCase
   end
 
   def test_auto_fix_duplication
-    u1 = User.create!(:first_name => 'James', :last_name => 'Bond')
-    assert_equal 'james-bond', u1.permalink
+    u = User.create!(:first_name => 'James', :last_name => 'Bond')
+    assert_equal 'james-bond', u.permalink
 
-    u2 = User.create!(:first_name => 'James', :last_name => 'Bond')
-    assert_equal 'james-bond-1', u2.permalink
+    u = User.create!(:first_name => 'James', :last_name => 'Bond')
+    assert_equal 'james-bond-1', u.permalink
 
-    u3 = User.create!(:first_name => 'James', :last_name => 'Bond')
-    assert_equal 'james-bond-2', u3.permalink
+    u = User.create!(:first_name => 'James', :last_name => 'Bond')
+    assert_equal 'james-bond-2', u.permalink
 
-    u4 = User.create!(:first_name => 'James', :last_name => 'Bond')
-    assert_equal 'james-bond-3', u4.permalink
+    u = User.create!(:first_name => 'James', :last_name => 'Bond')
+    assert_equal 'james-bond-3', u.permalink
   end
 
   def test_auto_fix_duplication
@@ -136,5 +136,19 @@ class HasPermalinkTest < Test::Unit::TestCase
 
     d2 = Department.create!(:name => 'Development')
     assert_equal 'development-007', d2.permalink
+  end
+
+  def test_duplication_is_smart
+    u = User.new(:first_name => 'Maxwell', :last_name => 'Smart')
+    u.save
+    assert_equal 'maxwell-smart', u.permalink
+
+    u = User.new(:first_name => 'Maxwell', :last_name => 'Smart')
+    u.save
+    assert_equal 'maxwell-smart-1', u.permalink
+
+    u = User.new(:first_name => 'Maxwell', :last_name => 'Smart-1')
+    u.save
+    assert_equal 'maxwell-smart-1-1', u.permalink
   end
 end
