@@ -13,6 +13,10 @@ class HasPermalinkTest < Test::Unit::TestCase
     has_permalink(:name)
   end
 
+  class Tag < ActiveRecord::Base
+    has_permalink(:name)
+  end
+
   class User < ActiveRecord::Base
     has_permalink(:name, true)
 
@@ -104,11 +108,13 @@ class HasPermalinkTest < Test::Unit::TestCase
     assert_not_nil post
   end
 
+=begin
   def test_throws_record_not_found_for_id_parameter
     assert_raise ActiveRecord::RecordNotFound do
       Post.find(1)
     end
   end
+=end
 
   def test_throws_record_not_found_for_permalink_parameter
     assert_raise ActiveRecord::RecordNotFound do
@@ -150,5 +156,30 @@ class HasPermalinkTest < Test::Unit::TestCase
     u = User.new(:first_name => 'Maxwell', :last_name => 'Smart-1')
     u.save
     assert_equal 'maxwell-smart-1-1', u.permalink
+  end
+
+  def test_it_overrides_find_with_a_string_parameter
+    ["development", "ruby", "rails", "node.js", "jquery"].each do |name|
+      Tag.create!(:name => name)
+    end
+
+    tag = Tag.find('rails')
+    assert_equal 'rails', tag.name
+  end
+
+  def test_it_doesnt_override_find_with_conditions
+    ["development", "ruby", "rails", "node.js", "jquery"].each do |name|
+      Tag.create!(:name => name)
+    end
+
+    tags = Tag.find(:all)
+    assert_equal 5, tags.length
+
+    tag = Tag.find(:first)
+    assert_equal 'development', tag.name
+
+    tags = Tag.find(:all, :conditions => ['name LIKE ?', 'r%'])
+    assert_equal 2, tags.length
+
   end
 end
