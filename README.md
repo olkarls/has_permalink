@@ -48,6 +48,9 @@ Use this syntax your controller:
 
 ## Updates
 
+### 2011-06-25, version 0.1.1
+* Only override find if there is only one argument which is a string.
+
 ### 2011-06-20, version 0.1.0
 * Auto resolve duplication, if wanted
 * Merged Anoopr's fork, thanks!
