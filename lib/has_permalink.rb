@@ -21,7 +21,7 @@ module HasPermalink
     # find(params[:id]) is quering the permalink field if it's a string
     #
     def find(*args)
-      if args.class == Array && args.first.class == String
+      if args.class == Array && (args.first.class == String || args.first.class == Fixnum) && args.length == 1
         find_by_permalink!(*args)
       else
         super(*args)

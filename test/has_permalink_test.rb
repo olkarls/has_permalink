@@ -108,14 +108,6 @@ class HasPermalinkTest < Test::Unit::TestCase
     assert_not_nil post
   end
 
-=begin
-  def test_throws_record_not_found_for_id_parameter
-    assert_raise ActiveRecord::RecordNotFound do
-      Post.find(1)
-    end
-  end
-=end
-
   def test_throws_record_not_found_for_permalink_parameter
     assert_raise ActiveRecord::RecordNotFound do
       Post.find('some-permalink')
@@ -181,5 +173,18 @@ class HasPermalinkTest < Test::Unit::TestCase
     tags = Tag.find(:all, :conditions => ['name LIKE ?', 'r%'])
     assert_equal 2, tags.length
 
+  end
+
+  def test_throws_record_not_found_for_id_parameter
+    assert_raise ActiveRecord::RecordNotFound do
+      Post.find(999)
+    end
+  end
+
+  def test_it_finds_record_with_integer_as_permalink
+    Post.create!(:title => '1')
+    post = Post.find('1')
+
+    assert_not_nil post
   end
 end
