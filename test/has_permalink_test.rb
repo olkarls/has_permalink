@@ -175,6 +175,12 @@ class HasPermalinkTest < Test::Unit::TestCase
 
   end
 
+  def test_dont_override_find_if_numeric_id
+    p = Post.create!(:title => 'Super Awesome Title')
+    post = Post.find(p.id)
+    assert_not_nil post
+  end
+
   def test_throws_record_not_found_for_id_parameter
     assert_raise ActiveRecord::RecordNotFound do
       Post.find(999)
