@@ -9,6 +9,10 @@ class HasPermalinkTest < Test::Unit::TestCase
     has_permalink
   end
 
+  class Page < ActiveRecord::Base
+    has_permalink(:title, true)
+  end
+
   class Category < ActiveRecord::Base
     has_permalink(:name)
   end
@@ -115,25 +119,39 @@ class HasPermalinkTest < Test::Unit::TestCase
   end
 
   def test_auto_fix_duplication
-    u = User.create!(:first_name => 'James', :last_name => 'Bond')
+    u = User.new(:first_name => 'James', :last_name => 'Bond')
+    u.save
     assert_equal 'james-bond', u.permalink
 
-    u = User.create!(:first_name => 'James', :last_name => 'Bond')
+    u = User.new(:first_name => 'James', :last_name => 'Bond')
+    u.save
     assert_equal 'james-bond-1', u.permalink
 
-    u = User.create!(:first_name => 'James', :last_name => 'Bond')
+    u = User.new(:first_name => 'James', :last_name => 'Bond')
+    u.save
     assert_equal 'james-bond-2', u.permalink
 
-    u = User.create!(:first_name => 'James', :last_name => 'Bond')
+    u = User.new(:first_name => 'James', :last_name => 'Bond')
+    u.save
     assert_equal 'james-bond-3', u.permalink
   end
 
-  def test_auto_fix_duplication
+  def test_auto_fix_duplication_with_integer
     d1 = Department.create!(:name => 'Development')
     assert_equal 'development', d1.permalink
 
     d2 = Department.create!(:name => 'Development')
     assert_equal 'development-007', d2.permalink
+  end
+
+  def test_fix_duplication_doesnt_add_integers_if_not_needed
+    p = Page.new(:title => 'Ruby on Rails')
+    p.save
+    assert_equal 'ruby-on-rails', p.permalink
+
+    p = Page.new(:title => 'Ruby')
+    p.save
+    assert_equal 'ruby', p.permalink
   end
 
   def test_duplication_is_smart
@@ -172,7 +190,6 @@ class HasPermalinkTest < Test::Unit::TestCase
 
     tags = Tag.find(:all, :conditions => ['name LIKE ?', 'r%'])
     assert_equal 2, tags.length
-
   end
 
   def test_dont_override_find_if_numeric_id
