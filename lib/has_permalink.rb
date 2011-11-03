@@ -72,7 +72,7 @@ module HasPermalink
           number = 0
 
           links.each_with_index do |link, index|
-            if link.permalink =~ /-\d?$/
+            if link.permalink =~ /#{permalink}-\d?$/
               new_number = link.permalink.match(/-(\d?)$/)[1].to_i
               number = new_number if new_number > number
             end
