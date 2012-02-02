@@ -72,8 +72,8 @@ module HasPermalink
           number = 0
 
           links.each_with_index do |link, index|
-            if link.permalink =~ /#{permalink}-\d?$/
-              new_number = link.permalink.match(/-(\d?)$/)[1].to_i
+            if link.permalink =~ /#{permalink}-\d*\.?\d+?$/
+              new_number = link.permalink.match(/-(\d*\.?\d+?)$/)[1].to_i
               number = new_number if new_number > number
             end
           end
