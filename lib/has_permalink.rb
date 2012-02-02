@@ -20,13 +20,13 @@ module HasPermalink
 
     # find(params[:id]) is quering the permalink field if it's a string
     #
-    def find(*args)
-      if args.class == Array && (args.first.class == String) && args.length == 1
-        find_by_permalink!(*args)
-      else
-        super(*args)
-      end
-    end
+    #def find(*args)
+    #  if args.class == Array && (args.first.class == String) && args.length == 1
+    #    find_by_permalink!(*args)
+    #  else
+    #    super(*args)
+    #  end
+    #end
 
     # Makes it possible to generate permalinks for
     # all instances of self:
