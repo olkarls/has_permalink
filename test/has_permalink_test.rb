@@ -104,14 +104,6 @@ class HasPermalinkTest < Test::Unit::TestCase
     assert_equal 'ola-karlsson', user.permalink
   end
 
-  def test_it_finds_by_permalink
-    p = Post.create!(:title => 'Super Awesome Title')
-
-    post = Post.find('super-awesome-title')
-
-    assert_not_nil post
-  end
-
   def test_throws_record_not_found_for_permalink_parameter
     assert_raise ActiveRecord::RecordNotFound do
       Post.find('some-permalink')
@@ -138,39 +130,39 @@ class HasPermalinkTest < Test::Unit::TestCase
     u = User.new(:first_name => 'James', :last_name => 'Bond')
     u.save
     assert_equal 'james-bond-4', u.permalink
-    
+
     u = User.new(:first_name => 'James', :last_name => 'Bond')
     u.save
     assert_equal 'james-bond-5', u.permalink
-    
+
     u = User.new(:first_name => 'James', :last_name => 'Bond')
     u.save
     assert_equal 'james-bond-6', u.permalink
-    
+
     u = User.new(:first_name => 'James', :last_name => 'Bond')
     u.save
     assert_equal 'james-bond-7', u.permalink
-    
+
     u = User.new(:first_name => 'James', :last_name => 'Bond')
     u.save
     assert_equal 'james-bond-8', u.permalink
-    
+
     u = User.new(:first_name => 'James', :last_name => 'Bond')
     u.save
     assert_equal 'james-bond-9', u.permalink
-    
+
     u = User.new(:first_name => 'James', :last_name => 'Bond')
     u.save
     assert_equal 'james-bond-10', u.permalink
-    
+
     u = User.new(:first_name => 'James', :last_name => 'Bond')
     u.save
     assert_equal 'james-bond-11', u.permalink
-    
+
     u = User.new(:first_name => 'James', :last_name => 'Bond')
     u.save
     assert_equal 'james-bond-12', u.permalink
-    
+
   end
 
   def test_auto_fix_duplication_with_integer
@@ -203,15 +195,6 @@ class HasPermalinkTest < Test::Unit::TestCase
     u = User.new(:first_name => 'Maxwell', :last_name => 'Smart-1')
     u.save
     assert_equal 'maxwell-smart-1-1', u.permalink
-  end
-
-  def test_it_overrides_find_with_a_string_parameter
-    ["development", "ruby", "rails", "node.js", "jquery"].each do |name|
-      Tag.create!(:name => name)
-    end
-
-    tag = Tag.find('rails')
-    assert_equal 'rails', tag.name
   end
 
   def test_it_doesnt_override_find_with_conditions
