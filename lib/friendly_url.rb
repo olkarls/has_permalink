@@ -28,7 +28,7 @@ module FriendlyUrl
       n.gsub!(/[ýÿŷ]/,          'y')
       n.gsub!(/[žżź]/,          'z')
       n.gsub!(/\s+/,            '-')
-      n.gsub!(/[^\sa-z0-9_-]/,  '')
+      n.gsub!(/[^\sa-zა-ჰ0-9_-]/,  '')
       n.gsub!(/-{2,}/,          '-')
       n.gsub!(/^-/,             '')
       n.gsub!(/-$/,             '')
