@@ -29,9 +29,11 @@ end
 
 def get_class(model_name)
   begin
-  model_name.split("::").inject(Object) do |mod,class_name|
+  @model_name=model_name.split("::").inject(Object) do |mod,class_name|
     mod.const_get(class_name)
   end
+  @model_name.generate_permalinks
+  puts "Congratulations! '#{model_name}' has permalinks!"
    rescue
     rescue_error(model_name)
   end
