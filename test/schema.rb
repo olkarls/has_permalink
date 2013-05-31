@@ -24,4 +24,16 @@ ActiveRecord::Schema.define(:version => 0) do
     t.string :name
     t.string :permalink
   end
+  create_table :not_nested_lists, :force => true do |t|
+    t.string :title
+    t.string :permalink
+  end
+  create_table :nested_in_dummy_lists, :force => true do |t|
+    t.string :title
+    t.string :permalink
+  end
+  create_table :nested_in_another_dummy_lists, :force => true do |t|
+    t.string :title
+    t.string :permalink
+  end
 end
