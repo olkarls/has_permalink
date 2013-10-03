@@ -70,3 +70,7 @@ Use this syntax your controller:
 * Fixed a bug where the permalink could sometimes remove characters.
 
 Copyright (c) 2009 - 2011 Ola Karlsson, released under the MIT license
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/olkarls/has_permalink/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
