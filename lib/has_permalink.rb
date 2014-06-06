@@ -53,7 +53,7 @@ module HasPermalink
     # Autofix duplication of permalinks
     def fix_duplication(permalink)
       if auto_fix_duplication
-        n = self.class.where(["permalink = ?", permalink]).count
+        n = self.class.where(["permalink = ? AND id != ?", permalink, id]).count
 
         if n > 0
           links = self.class.where(["permalink LIKE ?", "#{permalink}%"]).order("id")
