@@ -162,7 +162,20 @@ class HasPermalinkTest < Test::Unit::TestCase
     u = User.new(:first_name => 'James', :last_name => 'Bond')
     u.save
     assert_equal 'james-bond-12', u.permalink
+  end
 
+  def test_dont_update_integer_for_self_when_updating
+    p = Page.new(:title => 'Awesome Title')
+    p.save
+
+    assert_equal 'awesome-title', p.permalink
+
+    same_page = Page.find(p.id)
+
+    same_page.other_attribute = 'A new value'
+    same_page.save
+
+    assert_equal 'awesome-title', same_page.permalink
   end
 
   def test_auto_fix_duplication_with_integer
@@ -202,13 +215,13 @@ class HasPermalinkTest < Test::Unit::TestCase
       Tag.create!(:name => name)
     end
 
-    tags = Tag.find(:all)
+    tags = Tag.all
     assert_equal 5, tags.length
 
-    tag = Tag.find(:first)
+    tag = Tag.first
     assert_equal 'development', tag.name
 
-    tags = Tag.find(:all, :conditions => ['name LIKE ?', 'r%'])
+    tags = Tag.where('name LIKE ?', 'r%')
     assert_equal 2, tags.length
   end
 
