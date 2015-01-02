@@ -23,9 +23,11 @@ module HasPermalink
     #   Product.generate_permalinks
     #
     def generate_permalinks
-      self.all.each do |item|
-        item.generate_permalink
-        item.save
+      self.find_in_batches do |group|
+        group.each do |item|
+          item.generate_permalink
+          item.save
+        end
       end
     end
   end
