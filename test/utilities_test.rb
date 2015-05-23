@@ -21,7 +21,7 @@ module Another
   end
 end
 
-class UtilitiesTest < Test::Unit::TestCase
+class UtilitiesTest < Minitest::Test
   def test_it_can_find_classes
     util = HasPermalink::Utilities.new('NotNestedList')
     assert_equal(util.klass, NotNestedList)

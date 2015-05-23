@@ -2,7 +2,7 @@
 
 require 'test_helper'
 
-class HasPermalinkTest < Test::Unit::TestCase
+class HasPermalinkTest < Minitest::Test
   load_schema
 
   class Post < ActiveRecord::Base
@@ -105,7 +105,7 @@ class HasPermalinkTest < Test::Unit::TestCase
   end
 
   def test_throws_record_not_found_for_permalink_parameter
-    assert_raise ActiveRecord::RecordNotFound do
+    assert_raises ActiveRecord::RecordNotFound do
       Post.find('some-permalink')
     end
   end
@@ -167,7 +167,6 @@ class HasPermalinkTest < Test::Unit::TestCase
   def test_dont_update_integer_for_self_when_updating
     p = Page.new(:title => 'Awesome Title')
     p.save
-
     assert_equal 'awesome-title', p.permalink
 
     same_page = Page.find(p.id)
@@ -228,11 +227,11 @@ class HasPermalinkTest < Test::Unit::TestCase
   def test_dont_override_find_if_numeric_id
     p = Post.create!(:title => 'Super Awesome Title')
     post = Post.find(p.id)
-    assert_not_nil post
+    refute_nil post
   end
 
   def test_throws_record_not_found_for_id_parameter
-    assert_raise ActiveRecord::RecordNotFound do
+    assert_raises ActiveRecord::RecordNotFound do
       Post.find(999)
     end
   end
@@ -241,6 +240,6 @@ class HasPermalinkTest < Test::Unit::TestCase
     Post.create!(:title => '1')
     post = Post.find('1')
 
-    assert_not_nil post
+    refute_nil post
   end
 end
