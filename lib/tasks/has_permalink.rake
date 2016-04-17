@@ -2,7 +2,7 @@ require 'utilities'
 
 namespace :has_permalink do
   desc 'Generate permalinks for [MODEL]'
-  task :generate_permalinks, [:model_name] => [:environment] do |t, args|
+  task :generate_permalinks, [:model_name] => [:environment] do |_t, args|
     begin
       model_name = args.first[1]
     rescue
