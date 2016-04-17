@@ -1,5 +1,9 @@
 # has_permalink
 
+[![Build Status](https://semaphoreci.com/api/v1/olkarls/has_permalink/branches/master/badge.svg)](https://semaphoreci.com/olkarls/has_permalink)
+
+[![Coverage Status](https://coveralls.io/repos/github/olkarls/has_permalink/badge.svg?branch=master)](https://coveralls.io/github/olkarls/has_permalink?branch=master)
+
 Checkout <a href="http://haspermalink.org">haspermalink.org</a> for more details.
 
 A gem for generating url-safe permalink-string from any other attribute in the same ActiveRecord model.
@@ -73,4 +77,3 @@ Copyright (c) 2009 - 2011 Ola Karlsson, released under the MIT license
 
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/olkarls/has_permalink/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
