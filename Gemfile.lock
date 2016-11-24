@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    has_permalink (0.1.7)
+    has_permalink (0.1.8)
       activerecord (~> 4.0, >= 2.0.0)
 
 GEM
