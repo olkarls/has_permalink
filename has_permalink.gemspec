@@ -11,4 +11,5 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'simplecov', '~> 0.11', '>= 0.11.2'
   gem.add_development_dependency 'coveralls', '~> 0.8.13', '>= 0.8.13'
   gem.add_development_dependency 'sqlite3', '~> 1.0'
+  gem.add_development_dependency 'pry-byebug', '>= 3.4.0'
 end
