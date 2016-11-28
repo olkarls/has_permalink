@@ -7,6 +7,7 @@ Gem::Specification.new do |gem|
   gem.files = Dir['lib/**/*', 'rails/**/*']
   gem.homepage = 'http://haspermalink.org'
   gem.licenses = ['MIT']
+  gem.required_ruby_version = '>= 2.0'
   gem.add_runtime_dependency 'activerecord', '~> 4.0', '>= 2.0.0'
   gem.add_development_dependency 'simplecov', '~> 0.11', '>= 0.11.2'
   gem.add_development_dependency 'coveralls', '~> 0.8.13', '>= 0.8.13'

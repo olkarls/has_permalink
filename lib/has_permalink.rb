@@ -3,16 +3,18 @@ require 'friendly_url'
 module HasPermalink
   require 'railtie' if defined?(Rails) && Rails.version >= "3"
 
-  def has_permalink(generate_from = :title, auto_fix_duplication = false)
+  def has_permalink(generate_from = :title, auto_fix_duplication: false, to_param_returns_permalink: true)
     unless included_modules.include? InstanceMethods
       class_attribute :generate_from
       class_attribute :auto_fix_duplication
+      class_attribute :to_param_returns_permalink
       extend ClassMethods
       include InstanceMethods
     end
 
     self.generate_from        = generate_from
     self.auto_fix_duplication = auto_fix_duplication
+    self.to_param_returns_permalink = to_param_returns_permalink
     before_validation :generate_permalink
   end
 
@@ -45,7 +47,8 @@ module HasPermalink
 
     # Override to send permalink as params[:id]
     def to_param
-      permalink
+      return permalink if to_param_returns_permalink
+      super
     end
 
     private

@@ -10,7 +10,7 @@ class HasPermalinkTest < Minitest::Test
   end
 
   class Page < ActiveRecord::Base
-    has_permalink(:title, true)
+    has_permalink(:title, auto_fix_duplication: true, to_param_returns_permalink: true)
   end
 
   class Category < ActiveRecord::Base
@@ -22,7 +22,7 @@ class HasPermalinkTest < Minitest::Test
   end
 
   class User < ActiveRecord::Base
-    has_permalink(:name, true)
+    has_permalink(:name, auto_fix_duplication: true, to_param_returns_permalink: false)
 
     def name
       "#{first_name} #{last_name}"
@@ -30,7 +30,7 @@ class HasPermalinkTest < Minitest::Test
   end
 
   class Department < ActiveRecord::Base
-    has_permalink(:name, true)
+    has_permalink(:name, auto_fix_duplication: true)
 
     def resolve_duplication(permalink, number)
       "#{permalink}-007"
@@ -249,5 +249,15 @@ class HasPermalinkTest < Minitest::Test
     post = Post.find('1')
 
     refute_nil post
+  end
+
+  def test_to_param_to_returns_permalink
+    page = Page.create(:title => 'Permalink Title')
+    assert_equal 'permalink-title', page.to_param
+  end
+
+  def test_to_param_to_returns_id
+    user = User.create(:first_name => 'Tom', :last_name => 'Hanks')
+    assert_equal user.id.to_s, user.to_param
   end
 end
