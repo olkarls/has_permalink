@@ -1,5 +1,6 @@
 require 'simplecov'
 require 'coveralls'
+require 'pry-byebug'
 
 SimpleCov.formatter = Coveralls::SimpleCov::Formatter
 SimpleCov.start

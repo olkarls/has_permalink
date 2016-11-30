@@ -177,6 +177,14 @@ class HasPermalinkTest < Minitest::Test
     assert_equal 'awesome-title', same_page.permalink
   end
 
+  def test_deduplication_for_scoped_create
+    p1 = Page.where(:title => 'Hello Ruby', :other_attribute => 'Rev: 1').create!
+    assert_equal 'hello-ruby', p1.permalink
+
+    p2 = Page.where(:title => 'Hello Ruby', :other_attribute => 'Rev: 2').create!
+    assert_equal 'hello-ruby-1', p2.permalink
+  end
+
   def test_auto_fix_duplication_with_integer
     d1 = Department.create!(:name => 'Development')
     assert_equal 'development', d1.permalink
