@@ -51,9 +51,9 @@ class UtilitiesTest < Minitest::Test
 
     conn.close
 
-    assert_equal(NotNestedList.first.permalink, nil)
-    assert_equal(Dummy::NestedInDummyList.first.permalink, nil)
-    assert_equal(Another::Dummy::NestedInAnotherDummyList.first.permalink, nil)
+    assert_nil(NotNestedList.first.permalink)
+    assert_nil(Dummy::NestedInDummyList.first.permalink)
+    assert_nil(Another::Dummy::NestedInAnotherDummyList.first.permalink)
 
     util = HasPermalink::Utilities.new('NotNestedList')
     util.generate_permalinks

@@ -2,3 +2,5 @@
 .gem
 .idea
 /coverage
+.ruby-gemset
+.ruby-version
