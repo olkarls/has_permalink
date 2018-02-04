@@ -1,9 +1,6 @@
-class <%= migration_class_name %> < ActiveRecord::Migration
-  def self.up
+class <%= migration_class_name %> < ActiveRecord::Migration[<%= Rails.version.first(3) %>]
+  def change
     add_column :<%= name.underscore.camelize.tableize %>, :permalink, :string
     add_index :<%= name.underscore.camelize.tableize %>, :permalink
-  end
-  def self.down
-    remove_column :<%= name.underscore.camelize.tableize %>, :permalink
   end
 end
